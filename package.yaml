@@ -1,0 +1,46 @@
+name:                fused-effects-squeal
+version:             0.1.0.0
+#synopsis:
+#description:
+homepage:            https://github.com/ilyakooo0/fused-effects-squeal#readme
+license:             BSD3
+author:              Ilya Kostyuchenko
+maintainer:          ilyakooo0@gmail.com
+copyright:           Ilya Kostyuchenko
+category:            Web
+extra-source-files:
+- README.md
+
+dependencies:
+- base >= 4.7 && < 5
+- fused-effects
+- squeal-postgresql
+- unliftio-core
+- unliftio
+- unliftio-pool
+
+library:
+  source-dirs: src
+  exposed-modules:
+  - Control.Carrier.Squeal
+  - Control.Effect.Squeal
+
+default-extensions:
+- DataKinds
+- DeriveFunctor
+- DeriveGeneric
+- FlexibleContexts
+- FlexibleInstances
+- GADTs
+- GeneralizedNewtypeDeriving
+- MultiParamTypeClasses
+- OverloadedLabels
+- OverloadedStrings
+- TypeApplications
+- TypeOperators
+- UndecidableInstances
+- ScopedTypeVariables
+- PolyKinds
+- DerivingStrategies
+- StandaloneDeriving
+- LambdaCase
