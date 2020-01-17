@@ -9,7 +9,6 @@ module Control.Carrier.Squeal
     runSqueal,
     runSquealPool,
     runSquealRethrow,
-    SquealPool (..),
     module Control.Algebra,
   )
 where
@@ -18,12 +17,9 @@ import Control.Algebra
 import Control.Carrier.Orphans ()
 import Control.Effect.Squeal
 import Control.Monad.IO.Unlift
-import Data.Functor
 import qualified Squeal.PostgreSQL as Sq
 import UnliftIO
 import UnliftIO.Pool
-
-type DBConnection (schemas :: SchemasType) = K Connection schemas
 
 newtype SquealC schemas m k = SquealC {unSquealC :: DBConnection schemas -> m k}
 
@@ -144,23 +140,6 @@ instance Algebra sig m => Algebra (SquealPool schemas :+: sig) (SquealPoolC sche
   alg (L (GetSquealPool mk)) = SquealPoolC $ \r -> runSquealPool r $ mk r
   alg (R other) = SquealPoolC $ \r -> alg . hmap (runSquealPool r) $ other
   {-# INLINE alg #-}
-
-newtype SquealPool schemas m k = GetSquealPool (Pool (DBConnection schemas) -> m k)
-
-instance Functor m => Functor (SquealPool schemas m) where
-  fmap f (GetSquealPool mk) = GetSquealPool ((fmap . fmap) f mk)
-  {-# INLINE fmap #-}
-
-instance HFunctor (SquealPool schemas) where
-  hmap f (GetSquealPool mk) = GetSquealPool (fmap f mk)
-  {-# INLINE hmap #-}
-
-instance Effect (SquealPool schemas) where
-  thread ctx f (GetSquealPool mk) = GetSquealPool $ \y -> f (ctx $> mk y)
-  {-# INLINE thread #-}
-
-getSquealPool :: Has (SquealPool schemas) sig m => m (Pool (DBConnection schemas))
-getSquealPool = send $ GetSquealPool pure
 
 -- | Run a squeal session picking a database connection from the connection pool without a transaction and without any error handling. You probably shouldn't use this.
 runSqueal' ::

@@ -11,6 +11,11 @@ module Control.Effect.Squeal
     traversePrepared_,
     forPrepared_,
 
+    -- * Pool
+    DBConnection,
+    SquealPool (..),
+    getSquealPool,
+
     -- * Reexports
     module Sq,
     module Control.Algebra,
@@ -32,6 +37,8 @@ import Squeal.PostgreSQL as Sq hiding
     traversePrepared,
     traversePrepared_,
   )
+
+type DBConnection (schemas :: SchemasType) = K Connection schemas
 
 data Squeal (schemas :: SchemasType) m k where
   ManipulateParams ::
@@ -147,3 +154,20 @@ forPrepared_ ::
   Sq.Manipulation '[] schemas params '[] ->
   m ()
 forPrepared_ = flip traversePrepared_
+
+newtype SquealPool schemas m k = GetSquealPool (Pool (DBConnection schemas) -> m k)
+
+instance Functor m => Functor (SquealPool schemas m) where
+  fmap f (GetSquealPool mk) = GetSquealPool ((fmap . fmap) f mk)
+  {-# INLINE fmap #-}
+
+instance HFunctor (SquealPool schemas) where
+  hmap f (GetSquealPool mk) = GetSquealPool (fmap f mk)
+  {-# INLINE hmap #-}
+
+instance Effect (SquealPool schemas) where
+  thread ctx f (GetSquealPool mk) = GetSquealPool $ \y -> f (ctx $> mk y)
+  {-# INLINE thread #-}
+
+getSquealPool :: Has (SquealPool schemas) sig m => m (Pool (DBConnection schemas))
+getSquealPool = send $ GetSquealPool pure
