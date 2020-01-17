@@ -57,16 +57,19 @@ instance Functor m => Functor (Squeal schemas m) where
   fmap f (ManipulateParams man x mk) = ManipulateParams man x ((fmap . fmap) f mk)
   fmap f (TraversePrepared man x mk) = TraversePrepared man x ((fmap . fmap) f mk)
   fmap f (TraversePrepared_ man x mk) = TraversePrepared_ man x (fmap f mk)
+  {-# INLINE fmap #-}
 
 instance HFunctor (Squeal schemas) where
   hmap f (ManipulateParams man x mk) = ManipulateParams man x (fmap f mk)
   hmap f (TraversePrepared man x mk) = TraversePrepared man x (fmap f mk)
   hmap f (TraversePrepared_ man x mk) = TraversePrepared_ man x (f mk)
+  {-# INLINE hmap #-}
 
 instance Effect (Squeal schemas) where
   thread ctx f (ManipulateParams man x mk) = ManipulateParams man x $ \y -> f (ctx $> mk y)
   thread ctx f (TraversePrepared man x mk) = TraversePrepared man x $ \y -> f (ctx $> mk y)
   thread ctx f (TraversePrepared_ man x mk) = TraversePrepared_ man x $ f (ctx $> mk)
+  {-# INLINE thread #-}
 
 -- | See 'Sq.manipulateParams' from @squeal-postgresql@.
 manipulateParams ::
