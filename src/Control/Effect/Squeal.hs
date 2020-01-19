@@ -23,6 +23,7 @@ module Control.Effect.Squeal
 where
 
 import Control.Algebra
+import Control.Carrier.Orphans ()
 import Data.Functor
 import Squeal.PostgreSQL as Sq hiding
   ( Has,
