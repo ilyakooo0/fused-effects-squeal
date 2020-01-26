@@ -1,7 +1,7 @@
 name:                fused-effects-squeal
 version:             0.1.0.0
 synopsis:            A fused-effects adapter for squeal-postgresql.
-description:         A fused-effects adapter for squeal-postgresql.
+description:         A fused-effects adapter for squeal-postgresql. It allows you to conjure `MonadPQ` instances and manage connection pools in a `fused-effects` stack.
 homepage:            https://github.com/ilyakooo0/fused-effects-squeal#readme
 license:             BSD3
 author:              Ilya Kostyuchenko

@@ -4,12 +4,12 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 5f5e163efe89fcc9bdc6eeb7510c4da3546482b2d53d931cd6e218b269ab5fa9
+-- hash: 2bd6d3dae2a865c9b3cfec4093974332c556c54783400b8b1de0e11556966fc9
 
 name:           fused-effects-squeal
 version:        0.1.0.0
 synopsis:       A fused-effects adapter for squeal-postgresql.
-description:    A fused-effects adapter for squeal-postgresql.
+description:    A fused-effects adapter for squeal-postgresql. It allows you to conjure `MonadPQ` instances and manage connection pools in a `fused-effects` stack.
 category:       Control
 homepage:       https://github.com/ilyakooo0/fused-effects-squeal#readme
 author:         Ilya Kostyuchenko
@@ -20,6 +20,7 @@ license-file:   LICENSE
 build-type:     Simple
 extra-source-files:
     README.md
+    CHANGELOG.md
 
 library
   exposed-modules:
