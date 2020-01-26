@@ -4,11 +4,13 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 71b37a35dcdd207118aa15d0413b9360e39eab5cfff06f6bf9e9cecc9fc81dad
+-- hash: 5f5e163efe89fcc9bdc6eeb7510c4da3546482b2d53d931cd6e218b269ab5fa9
 
 name:           fused-effects-squeal
 version:        0.1.0.0
-category:       Web
+synopsis:       A fused-effects adapter for squeal-postgresql.
+description:    A fused-effects adapter for squeal-postgresql.
+category:       Control
 homepage:       https://github.com/ilyakooo0/fused-effects-squeal#readme
 author:         Ilya Kostyuchenko
 maintainer:     ilyakooo0@gmail.com
@@ -31,8 +33,8 @@ library
   default-extensions: DataKinds DeriveFunctor DeriveGeneric FlexibleContexts FlexibleInstances GADTs GeneralizedNewtypeDeriving MultiParamTypeClasses OverloadedLabels OverloadedStrings TypeApplications TypeOperators UndecidableInstances ScopedTypeVariables PolyKinds DerivingStrategies StandaloneDeriving LambdaCase
   build-depends:
       base >=4.7 && <5
-    , fused-effects
-    , squeal-postgresql
+    , fused-effects >=1.0.0.0
+    , squeal-postgresql >=0.5.2.0
     , unliftio
     , unliftio-core
     , unliftio-pool

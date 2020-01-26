@@ -1,20 +1,20 @@
 name:                fused-effects-squeal
 version:             0.1.0.0
-#synopsis:
-#description:
+synopsis:            A fused-effects adapter for squeal-postgresql.
+description:         A fused-effects adapter for squeal-postgresql.
 homepage:            https://github.com/ilyakooo0/fused-effects-squeal#readme
 license:             BSD3
 author:              Ilya Kostyuchenko
 maintainer:          ilyakooo0@gmail.com
 copyright:           Ilya Kostyuchenko
-category:            Web
+category:            Control
 extra-source-files:
 - README.md
 
 dependencies:
 - base >= 4.7 && < 5
-- fused-effects
-- squeal-postgresql
+- fused-effects >= 1.0.0.0
+- squeal-postgresql >= 0.5.2.0
 - unliftio-core
 - unliftio
 - unliftio-pool
