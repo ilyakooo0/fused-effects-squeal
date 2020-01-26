@@ -10,6 +10,7 @@ copyright:           Ilya Kostyuchenko
 category:            Control
 extra-source-files:
 - README.md
+- CHANGELOG.md
 
 dependencies:
 - base >= 4.7 && < 5
