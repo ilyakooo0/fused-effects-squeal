@@ -1,4 +1,4 @@
-# fused-effects-squeal ![Hackage](https://img.shields.io/hackage/v/fused-effects-squeal?color=informational&label=Hackage&logo=haskell)
+# fused-effects-squeal [![Hackage](https://img.shields.io/hackage/v/fused-effects-squeal?color=informational&label=Hackage&logo=haskell)](http://hackage.haskell.org/package/fused-effects-squeal)
 
 This is an overview of the way this library works. If you would like to learn how Squeal itself works you should head to the [morphismtech/squeal repository](https://github.com/morphismtech/squeal).
 
